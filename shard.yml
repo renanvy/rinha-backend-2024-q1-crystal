@@ -1,0 +1,23 @@
+name: rinha-backend-2024-q1-crystal
+version: 0.1.0
+
+authors:
+  - Renan <renanvy@gmail.com>
+
+targets:
+  rinha-backend-2024-q1-crystal:
+    main: src/rinha.cr
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+  jennifer:
+    github: imdrasil/jennifer.cr
+    version: "= 0.13.0"
+  pg:
+    github: will/crystal-pg
+    version: "= 0.26.0"
+
+crystal: '>= 1.11.2'
+
+license: MIT
