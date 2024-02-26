@@ -34,19 +34,21 @@ post "/clientes/:id/transacoes" do |env|
   amount = env.params.json["valor"] && env.params.json["valor"].is_a?(Int64) ? env.params.json["valor"].as(Int64).to_i : nil
 
   if account_id >= 1 && account_id <= 5
-    transaction = Transaction.new({
-      account_id: account_id,
-      amount: amount,
-      type: type,
-      description: description
-    })
+    begin
+      transaction = Transaction.new({
+        account_id: account_id,
+        amount: amount,
+        type: type,
+        description: description
+      })
 
-    if TransactionCreator.new(transaction).create
+      TransactionCreator.new(transaction).create
+
       {
         limite: transaction.account!.limit_amount,
         saldo: transaction.account!.balance
       }.to_json
-    else
+    rescue exception
       env.response.status_code = 422
     end
   else
