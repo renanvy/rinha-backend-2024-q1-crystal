@@ -17,6 +17,8 @@ dependencies:
   pg:
     github: will/crystal-pg
     version: "= 0.26.0"
+  i18n:
+    github: crimson-knight/i18n.cr
 
 crystal: '>= 1.11.2'
 

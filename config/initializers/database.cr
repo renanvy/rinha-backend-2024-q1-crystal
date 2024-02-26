@@ -2,7 +2,7 @@ require "jennifer"
 require "jennifer/adapter/postgres"
 
 Jennifer::Config.configure do |conf|
-  conf.host = "database"
+  conf.host = "postgres"
   conf.user = "postgres"
   conf.password = "postgres"
   conf.adapter = "postgres"

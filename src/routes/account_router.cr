@@ -23,7 +23,6 @@ get "/clientes/:id/extrato" do |env|
     }.to_json
   else
     env.response.status_code = 404
-    { error: "Conta não encontrada" }.to_json
   end
 end
 
@@ -42,20 +41,15 @@ post "/clientes/:id/transacoes" do |env|
       description: description
     })
 
-    if Account.create_transaction(transaction)
-      puts "entrou"
-      puts transaction.inspect
+    if TransactionCreator.new(transaction).create
       {
-        limite: 1,
-        saldo: 1
+        limite: transaction.account!.limit_amount,
+        saldo: transaction.account!.balance
       }.to_json
     else
-      puts transaction.inspect
       env.response.status_code = 422
-      { error: "Erro de validação" }.to_json
     end
   else
     env.response.status_code = 404
-    { error: "Conta não encontrada" }.to_json
   end
 end
