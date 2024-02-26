@@ -1,27 +1,19 @@
-# rinha-backend-2024-q1-crystal
+# Rinha Backend 2024 Q1 - Crystal
 
-TODO: Write a description here
+Versão em Crystal da [rinha de backend 2ª edição](https://github.com/zanfranceschi/rinha-de-backend-2024-q1) 2024/Q1
 
-## Installation
+## Stack
 
-TODO: Write installation instructions here
+- Crystal
+- Postgresql
+- NGINX
 
-## Usage
+## Rodar aplicação
 
-TODO: Write usage instructions here
+```bash
+$ docker compose up
+```
 
-## Development
+## Autor
 
-TODO: Write development instructions here
-
-## Contributing
-
-1. Fork it (<https://github.com/your-github-user/rinha-backend-2024-q1-crystal/fork>)
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
-
-## Contributors
-
-- [Renan](https://github.com/your-github-user) - creator and maintainer
+[@renanvy](https://www.linkedin.com/in/renanvy/)
