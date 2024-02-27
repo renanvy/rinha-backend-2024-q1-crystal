@@ -15,6 +15,11 @@ CREATE TABLE transactions(
   CONSTRAINT fk_account_id FOREIGN KEY (account_id) REFERENCES accounts(id)
 );
 
+CREATE INDEX idx_transactions_account_id ON transactions
+(
+    account_id ASC
+);
+
 DELETE FROM transactions;
 DELETE FROM accounts;
 

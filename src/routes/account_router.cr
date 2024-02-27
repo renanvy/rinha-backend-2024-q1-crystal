@@ -9,7 +9,7 @@ get "/clientes/:id/extrato" do |env|
     {
       saldo: {
         total: account.balance,
-        data_extrato: Time.utc,
+        data_extrato: Time.utc.to_s("%FT%X.%6NZ"),
         limite: account.limit_amount
       },
       ultimas_transacoes: transactions.map do |transaction|
@@ -17,7 +17,7 @@ get "/clientes/:id/extrato" do |env|
           valor: transaction.amount,
           tipo: transaction.type,
           descricao: transaction.description,
-          realizada_em: transaction.created_at
+          realizada_em: transaction.created_at!.to_s("%FT%X.%6NZ")
         }
       end
     }.to_json
@@ -29,17 +29,14 @@ end
 post "/clientes/:id/transacoes" do |env|
   env.response.content_type = "application/json"
   account_id = env.params.url["id"].to_i32
-  type = env.params.json["tipo"].as(String)
-  description = env.params.json["descricao"] ? env.params.json["descricao"].as(String) : nil
-  amount = env.params.json["valor"] && env.params.json["valor"].is_a?(Int64) ? env.params.json["valor"].as(Int64).to_i : nil
 
   if account_id >= 1 && account_id <= 5
     begin
       transaction = Transaction.new({
         account_id: account_id,
-        amount: amount,
-        type: type,
-        description: description
+        amount: env.params.json["valor"] && env.params.json["valor"].is_a?(Int64) ? env.params.json["valor"].as(Int64).to_i : nil,
+        type: env.params.json["tipo"],
+        description:  env.params.json["descricao"]
       })
 
       TransactionCreator.new(transaction).create

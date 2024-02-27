@@ -6,7 +6,7 @@ COPY ./shard.yml ./shard.lock /app/
 RUN shards install --production -v
 # Build a binary
 COPY . /app/
-RUN shards build --static --no-debug --release --production -v
+RUN shards build --no-debug --static
 # ===============
 # Result image with one layer
 FROM alpine:latest
