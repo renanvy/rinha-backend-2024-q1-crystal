@@ -15,5 +15,7 @@ module Server
   VERSION = "0.1.0"
   port = ENV["PORT"].to_i
   Kemal.config.logging = false
+  Transaction.get_account_transactions(1)
+
   Kemal.run port
 end
