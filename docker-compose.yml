@@ -14,7 +14,7 @@ services:
       resources:
         limits:
           cpus: '0.3'
-          memory: '150MB'
+          memory: '50MB'
 
   api2:
     <<: *api
@@ -39,13 +39,13 @@ services:
       start_period: 5s
     volumes:
       - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./config/postgresql.conf:/etc/postgresql/postgresql.conf
-    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+      # - ./config/postgresql.conf:/etc/postgresql/postgresql.conf
+    # command: 'postgres -c max_connections=100 -c shared_buffers=128MB -c synchronous_commit=off -c fsync=off -c full_page_writes=off'
     deploy:
       resources:
         limits:
-          cpus: '0.6'
-          memory: '200MB'
+          cpus: '0.7'
+          memory: '400MB'
 
   nginx:
     image: nginx
@@ -60,7 +60,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.3'
+          cpus: '0.2'
           memory: '50MB'
 
 networks:

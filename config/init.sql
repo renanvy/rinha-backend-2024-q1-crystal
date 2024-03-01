@@ -1,10 +1,10 @@
-CREATE TABLE accounts(
+CREATE UNLOGGED TABLE accounts(
   id SERIAL PRIMARY KEY,
   limit_amount INT NOT NULL,
   balance INT NOT NULL DEFAULT 0
 );
 
-CREATE TABLE transactions(
+CREATE UNLOGGED TABLE transactions(
   id SERIAL PRIMARY KEY,
   amount INT NOT NULL,
   description VARCHAR(100) NOT NULL,
