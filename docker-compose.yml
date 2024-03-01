@@ -35,12 +35,11 @@ services:
       test: ['CMD', 'pg_isready', '-U', 'postgres', '-d', 'rinha_crystal']
       interval: 5s
       timeout: 5s
-      retries: 20
-      start_period: 5s
+      retries: 5
     volumes:
       - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
-      # - ./config/postgresql.conf:/etc/postgresql/postgresql.conf
-    # command: 'postgres -c max_connections=100 -c shared_buffers=128MB -c synchronous_commit=off -c fsync=off -c full_page_writes=off'
+      - ./config/postgresql.conf:/etc/postgresql/postgresql.conf
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
     deploy:
       resources:
         limits:

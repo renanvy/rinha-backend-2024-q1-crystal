@@ -6,16 +6,12 @@ require "./services/*"
 require "./routes/*"
 
 module Server
-  ENV["PORT"] ||= "3000"
-
   I18n.load_path += ["#{__DIR__}/locales/**/*.yml"]
   I18n.init
-  I18n.default_locale = "en"
 
   VERSION = "0.1.0"
-  port = ENV["PORT"].to_i
   Kemal.config.logging = false
   Transaction.get_account_transactions(1)
 
-  Kemal.run port
+  Kemal.run 3000
 end
