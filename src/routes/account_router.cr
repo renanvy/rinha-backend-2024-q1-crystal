@@ -34,7 +34,7 @@ post "/clientes/:id/transacoes" do |env|
     begin
       transaction = Transaction.new({
         account_id: account_id,
-        amount: env.params.json["valor"] && env.params.json["valor"].is_a?(Int64) ? env.params.json["valor"].as(Int64).to_i : nil,
+        amount: env.params.json["valor"].to_s.to_i,
         type: env.params.json["tipo"],
         description:  env.params.json["descricao"]
       })
