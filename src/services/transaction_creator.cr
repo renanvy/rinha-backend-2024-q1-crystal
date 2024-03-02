@@ -6,11 +6,9 @@ class TransactionCreator
   end
 
   def create
-    account = Account.find!(transaction.account_id)
+    raise "Invalid transaction" unless transaction.valid?
 
-    account.with_lock do
-      raise "Invalid transaction" unless transaction.valid?
-
+    Jennifer::Adapter.default_adapter.transaction do |tx|
       account = Account.all.lock.find!(transaction.account_id)
       account.balance = calculate_balance(account, transaction)
       account.update!

@@ -7,7 +7,7 @@ Jennifer::Config.configure do |conf|
   conf.password = "postgres"
   conf.adapter = "postgres"
   conf.db = "rinha_crystal"
-  conf.pool_size = 15
+  conf.pool_size = 10
   conf.logger.level = :error
 end
 
