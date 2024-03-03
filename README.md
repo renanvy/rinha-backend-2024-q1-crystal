@@ -8,6 +8,8 @@ Versão em Crystal da [rinha de backend 2ª edição](https://github.com/zanfran
 - Postgresql
 - NGINX
 
+![GHr8Zp9XgAACLUu](https://github.com/renanvy/rinha-backend-2024-q1-crystal/assets/2266325/f043c165-b940-46a2-8bcc-077d5d209c05)
+
 ## Rodar aplicação
 
 ```bash
