@@ -1,8 +1,8 @@
 version: '3.5'
 services:
   api1: &api
-    # build: .
-    image: renanvy/rinha-2024-q1-crystal:latest
+    build: .
+    # image: renanvy/rinha-2024-q1-crystal:latest
     container_name: api1
     environment:
       - PORT=3000

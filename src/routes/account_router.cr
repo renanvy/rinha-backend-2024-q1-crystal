@@ -4,7 +4,6 @@ get "/clientes/:id/extrato" do |env|
 
   if account_id >= 1 && account_id <= 5
     account = Account.find!(account_id)
-    transactions = Transaction.get_account_transactions(account_id)
 
     {
       saldo: {
@@ -12,12 +11,12 @@ get "/clientes/:id/extrato" do |env|
         data_extrato: Time.utc.to_s("%FT%X.%6NZ"),
         limite: account.limit_amount
       },
-      ultimas_transacoes: transactions.map do |transaction|
+      ultimas_transacoes: account.latest_transactions.map do |transaction|
         {
-          valor: transaction.amount,
-          tipo: transaction.type,
-          descricao: transaction.description,
-          realizada_em: transaction.created_at!.to_s("%FT%X.%6NZ")
+          valor: transaction["amount"],
+          tipo: transaction["type"],
+          descricao: transaction["description"],
+          realizada_em: transaction["created_at"]
         }
       end
     }.to_json
@@ -32,18 +31,19 @@ post "/clientes/:id/transacoes" do |env|
 
   if account_id >= 1 && account_id <= 5
     begin
-      transaction = Transaction.new({
+      transaction = {
         account_id: account_id,
         amount: env.params.json["valor"].to_s.to_i,
         type: env.params.json["tipo"],
-        description:  env.params.json["descricao"]
-      })
+        description:  env.params.json["descricao"],
+        created_at: Time.utc
+      }
 
-      TransactionCreator.new(transaction).create
+      account = Account.create_transaction(transaction)
 
       {
-        limite: transaction.account!.limit_amount,
-        saldo: transaction.account!.balance
+        limite: 1,
+        saldo: 1
       }.to_json
     rescue exception
       env.response.status_code = 422

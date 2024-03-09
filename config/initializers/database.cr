@@ -8,7 +8,7 @@ Jennifer::Config.configure do |conf|
   conf.adapter = "postgres"
   conf.db = "rinha_crystal"
   conf.pool_size = 15
-  conf.logger.level = :error
+  conf.logger.level = :debug
 end
 
 # Log.setup "db", :debug, Log::IOBackend.new(formatter: Jennifer::Adapter::DBFormatter)
